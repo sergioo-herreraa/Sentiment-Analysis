@@ -124,15 +124,16 @@ def perceptron(feature_matrix, labels, T):
         the offset parameter `theta_0` as a floating point number
             (found also after T iterations through the feature matrix).
     """
-    # Your code here
-    raise NotImplementedError
+    current_theta=np.zeros(feature_matrix.shape[1])
+    current_theta_0=0
     for t in range(T):
-        for i in get_order(nsamples):
-            # Your code here
-            raise NotImplementedError
-    # Your code here
-    raise NotImplementedError
-
+        for i in get_order(feature_matrix.shape[0]):
+            r=perceptron_single_step_update(feature_matrix[i],labels[i],current_theta,current_theta_0)
+            theta=r[0]        
+            theta_0=r[1]
+            current_theta=theta
+            current_theta_0=theta_0        
+    return (theta,theta_0)  
 
 
 def average_perceptron(feature_matrix, labels, T):
@@ -161,7 +162,23 @@ def average_perceptron(feature_matrix, labels, T):
         the average offset parameter `theta_0` as a floating point number
             (averaged also over T iterations through the feature matrix).
     """
-    # Your code here
+    current_theta=np.zeros(feature_matrix.shape[1])
+    current_theta_0=0
+    avgtheta=np.zeros(feature_matrix.shape[1])
+    avgtheta0=0
+    for t in range(T):
+        for i in get_order(feature_matrix.shape[0]):
+            r=perceptron_single_step_update(feature_matrix[i],labels[i],current_theta,current_theta_0)
+            theta=r[0]        
+            theta_0=r[1]
+            current_theta=theta
+            current_theta_0=theta_0
+            avgtheta+=theta
+            avgtheta0+=theta_0
+    theta=avgtheta/(feature_matrix.shape[0]*T)
+    theta_0=avgtheta0/(feature_matrix.shape[0]*T)
+    
+    return (theta,theta_0)
     raise NotImplementedError
 
 

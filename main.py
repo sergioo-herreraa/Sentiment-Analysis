@@ -112,8 +112,8 @@ plot_toy_results('Pegasos', thetas_pegasos)
 # accurate algorithm with the optimal choice of hyperparameters.
 #-------------------------------------------------------------------------------
 
-# best_theta = None # Your code here
-# wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
-# sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
-# print("Most Explanatory Word Features")
-# print(sorted_word_features[:10])
+ best_theta = None # Your code here
+ wordlist   = [word for (idx, word) in sorted(zip(dictionary.values(), dictionary.keys()))]
+ sorted_word_features = utils.most_explanatory_word(best_theta, wordlist)
+ print("Most Explanatory Word Features")
+ print(sorted_word_features[:10])

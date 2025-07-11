@@ -281,7 +281,14 @@ def classify(feature_matrix, theta, theta_0):
         given theta and theta_0. If a prediction is GREATER THAN zero, it
         should be considered a positive classification.
     """
-    # Your code here
+    array=[]
+    for i in range(feature_matrix.shape[0]):
+        dot=np.dot(feature_matrix[i],theta)+theta_0
+        if dot>0:
+            array.append(1)
+        else:
+            array.append(-1)
+    return np.array(array)
     raise NotImplementedError
 
 
@@ -318,7 +325,15 @@ def classifier_accuracy(
         trained classifier on the training data and the second element is the
         accuracy of the trained classifier on the validation data.
     """
-    # Your code here
+    r1=classifier(train_feature_matrix, train_labels, **kwargs)
+    
+    preds1=classify(train_feature_matrix, r1[0], r1[1])
+    preds2=classify(val_feature_matrix, r1[0], r1[1])
+    
+    accuracy_of_the_trained_classifier_on_the_training_data=accuracy(preds1, train_labels)
+    accuracy_of_the_trained_classifier_on_the_validation_data=accuracy(preds2, val_labels)
+    
+    return (accuracy_of_the_trained_classifier_on_the_training_data,accuracy_of_the_trained_classifier_on_the_validation_data)
     raise NotImplementedError
 
 

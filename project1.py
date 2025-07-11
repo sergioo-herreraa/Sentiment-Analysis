@@ -38,7 +38,8 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
         the hinge loss, as a float, associated with the given data point and
         parameters.
     """
-    # Your code here
+    y=np.dot(feature_vector,theta)+theta_0
+    hinge_loss=float(np.maximum(0,1-y*label)
     raise NotImplementedError
 
 
@@ -60,7 +61,8 @@ def hinge_loss_full(feature_matrix, labels, theta, theta_0):
         parameters.  This number should be the average hinge loss across all of
     """
 
-    # Your code here
+    y = np.dot(feature_matrix, theta) + theta_0
+    losses = np.maximum(0.0, 1 - y * labels)
     raise NotImplementedError
 
 
@@ -87,7 +89,15 @@ def perceptron_single_step_update(
         the updated feature-coefficient parameter `theta` as a numpy array
         the updated offset parameter `theta_0` as a floating point number
     """
-    # Your code here
+    eps=0.0000000000000001
+    y=np.dot(feature_vector,current_theta)+current_theta_0
+    if y*label<=eps:
+        theta=current_theta+label*feature_vector
+        theta_0=current_theta_0+label
+        return (theta,theta_0)
+    else:
+        return (current_theta,current_theta_0)
+        
     raise NotImplementedError
 
 
@@ -182,7 +192,15 @@ def pegasos_single_step_update(
         real valued number with the value of theta_0 after the old updated has
         completed.
     """
-    # Your code here
+    y=np.dot(feature_vector,theta)+theta_0
+    if y*label<=1:
+        theta=(1-eta*L)*theta+eta*label*feature_vector
+        theta_0=theta_0+eta*label
+        return (theta,theta_0)
+    else:
+        theta=(1-eta*L)*theta
+        theta_0=theta_0
+        return (theta,theta_0)
     raise NotImplementedError
 
 
@@ -214,7 +232,19 @@ def pegasos(feature_matrix, labels, T, L):
         the value of the theta_0, the offset classification parameter, found
         after T iterations through the feature matrix.
     """
-    # Your code here
+    current_theta=np.zeros(feature_matrix.shape[1])
+    current_theta_0=0
+    numofupdates=0
+    for t in range(T):
+       for i in get_order(feature_matrix.shape[0]):
+           numofupdates+=1
+           eta=1/(np.sqrt(numofupdates))
+           r=pegasos_single_step_update(feature_matrix[i],labels[i],L, eta,current_theta,current_theta_0)
+           theta=r[0]        
+           theta_0=r[1]
+           current_theta=theta
+           current_theta_0=theta_0     
+    return (theta,theta_0)
     raise NotImplementedError
 
 

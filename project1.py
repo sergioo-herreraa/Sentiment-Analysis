@@ -39,7 +39,7 @@ def hinge_loss_single(feature_vector, label, theta, theta_0):
         parameters.
     """
     y=np.dot(feature_vector,theta)+theta_0
-    hinge_loss=float(np.maximum(0,1-y*label)
+    hinge_loss=float(np.maximum(0,1-y*label))
     raise NotImplementedError
 
 

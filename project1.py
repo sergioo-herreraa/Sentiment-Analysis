@@ -364,9 +364,6 @@ def extract_words(text):
         a list of lowercased words in the string, where punctuation and digits
         count as their own words.
     """
-    # Your code here
-    raise NotImplementedError
-
     for c in punctuation + digits:
         text = text.replace(c, ' ' + c + ' ')
     return text.lower().split()
@@ -384,9 +381,6 @@ def bag_of_words(texts, remove_stopword=False):
         a dictionary that maps each word appearing in `texts` to a unique
         integer `index`.
     """
-    # Your code here
-    raise NotImplementedError
-    
     indices_by_word = {}  # maps word to unique index
     for text in texts:
         word_list = extract_words(text)
@@ -399,7 +393,7 @@ def bag_of_words(texts, remove_stopword=False):
 
 
 
-def extract_bow_feature_vectors(reviews, indices_by_word, binarize=True):
+def extract_bow_feature_vectors(reviews, indices_by_word, binarize=False):
     """
     Args:
         `reviews` - a list of natural language strings
@@ -416,9 +410,7 @@ def extract_bow_feature_vectors(reviews, indices_by_word, binarize=True):
         for word in word_list:
             if word not in indices_by_word: continue
             feature_matrix[i, indices_by_word[word]] += 1
-    if binarize:
-        # Your code here
-        raise NotImplementedError
+  
     return feature_matrix
 
 

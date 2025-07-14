@@ -386,7 +386,7 @@ def bag_of_words(texts, remove_stopword=False):
         word_list = extract_words(text)
         for word in word_list:
             if word in indices_by_word: continue
-            if word in stopword: continue
+            
             indices_by_word[word] = len(indices_by_word)
 
     return indices_by_word
